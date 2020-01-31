@@ -23,39 +23,49 @@ d3.json('../../samples.json').then((importedData) => {
     // filter the data object
     var filteredData = data.samples.filter(sample => sample.id === test_id )
 
+    // console.log(filteredData)
+
     // pulling out the arrays we need using map
     // sample values
-    var sample_values = filteredData.map(row => row.sample_values).splice(0, 10);
-    // sample_values = sample_values.splice(0, 10);
+    var sample_values = filteredData.map(row => row.sample_values) //.splice(0, 10);
 
-    // sample_values.forEach(function(d) {
-    //     d = parseInt(d);
-    // });
+    // slice the first rows from the sample_values object (array at )
+        // thankfully the data is sorted descending order
+    sample_values = sample_values[0].slice(0,10);
 
     // otu_ids
     var otu_ids = filteredData.map(row => row.otu_ids);
+
+    // grab the first 10
+    otu_ids = otu_ids[0].slice(0,10);
+
+    console.log(otu_ids);
+
     // otu_labels
     var otu_labels = filteredData.map(row => row.otu_labels);
 
-    // console.log(otu_ids);
+    // grab the first 10
+    otu_labels = otu_labels[0].slice(0,10);
 
-    console.log(sample_values);
+   
     
     // // setup the trace
-    var trace = {
-        x: otu_ids,
-        y: sample_values,
+    var trace1 = {
+        x: sample_values,
+        y: otu_ids,
         type: 'bar',
+        orientation: 'h',
+        width: 500,
         text: otu_labels
     }
 
-    var data = [trace]
+    var data = [trace1]
 
     var layout = {
       title: 'Top 10 Samples'  
     }
 
-    // Plotly.newPlot("bar", data, layout);
+    Plotly.newPlot("bar", data, layout);
 
     // check values
     // console.log(sample_values);
