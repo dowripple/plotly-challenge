@@ -6,9 +6,6 @@ d3.json('../../samples.json').then((importedData) => {
 
     var data = importedData;
 
-    // get a look at the object
-    console.log(data);
-    
     // get unique list of test ids
     var test_ids = data.names
 
@@ -20,8 +17,20 @@ d3.json('../../samples.json').then((importedData) => {
 
     }
 
-    // function that will refresh each component based on the drop down value
-    function optionChanged(test_id) {
+
+    //selDataset.on('change', optionChanged())
+    // for now just get the value from the select box
+    var test_id = selDataset.node().value;
+     
+    // initialize based on the current value in drop down
+    optionChanged(test_id);
+
+});
+
+// function that will refresh each component based on the drop down value
+function optionChanged(test_id) {
+
+    d3.json('../../samples.json').then((importedData) => {
 
         var data = importedData;
 
@@ -118,15 +127,55 @@ d3.json('../../samples.json').then((importedData) => {
         var row = demoTable.append('tr').html(`<td>bbtype:</td><td>${filteredMetaData[0].bbtype}</td>`);     
         var row = demoTable.append('tr').html(`<td>wfreq:</td><td>${filteredMetaData[0].wfreq}</td>`);
 
-    }
+        //come back and use d3 for CSV
 
-    //selDataset.on('change', optionChanged())
-    // for now just get the value from the select box
-    var test_id = selDataset.node().value;
+        // open the other json file (meta.json)
+        d3.json('../../meta.json').then((importedData) => {
 
-    // initialize based on the current value in drop down
-    optionChanged(test_id);
+            var data2 = importedData;
 
-});
+            console.log(test_id);
+            
+            // consozle.log(typeof(test_id))
+        
+            var test_index = Object.entries(data2.ID).forEach(([key, value]) => {
+
+                // console.log(value)
+                if (value === test_id) {
+
+                    return key;
+                    // console.log(key)
+
+                }
+
+            })
+            
+
+            // console.log(test_index);
+
+            // var meta_ids = data2.ID.map(meta =>  meta);
+
+            // console.log(meta_ids);
+
+            // // find the index of the value we need, based on ID
+            // var test_index = data2.ID.map(function(d,i) {
+
+            //     if (d === test_id) {
+            //         return i
+            //     };
+
+            // });
+
+            // console.log.apply(test_index)
+
+            // filter 2nd data set for the same test_id
+            // var filteredData2 = data2.filter(meta => meta.id === test_id );
+
+            // console.log(filteredData2);
+
+
+        })
+    })
+}
 
 
