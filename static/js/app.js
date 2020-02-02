@@ -45,38 +45,43 @@ function optionChanged(test_id) {
         // sample values
         var sample_values = filteredSampleData.map(row => row.sample_values);
 
+        // get the array, not the object
+        sample_values = sample_values[0];
+
         // slice the first rows from the sample_values object (array at )
             // thankfully the data is sorted descending order
-        sample_values = sample_values[0].slice(0,10).reverse();
+        var top_sample_values = sample_values.slice(0,10).reverse();
 
         // otu_ids
         var otu_ids = filteredSampleData.map(row => row.otu_ids);
+        otu_ids = otu_ids[0];
 
         // grab the first 10
-        otu_ids = otu_ids[0].slice(0,10).reverse();
+        var top_otu_ids = otu_ids.slice(0,10).reverse();
 
         // aapend the text to the beginning of the id, but in a new array
-        var otu_id_labels = [];
-        for (i = 0; i < otu_ids.length; i++) {
+        var top_otu_id_labels = [];
+        for (i = 0; i < top_otu_ids.length; i++) {
 
-            otu_id_labels.push('OTU '.concat(otu_ids[i]));
+            top_otu_id_labels.push('OTU '.concat(top_otu_ids[i]));
 
         }
 
         // otu_labels
         var otu_labels = filteredSampleData.map(row => row.otu_labels);
+        otu_labels = otu_labels[0];
 
-        // grab the first 10
-        otu_labels = otu_labels[0].slice(0,10).reverse();
+        // grab the first 10       
+        var top_otu_labels = otu_labels.slice(0,10).reverse();
 
         // // setup the trace
         var trace1 = {
-            x: sample_values,
-            y: otu_id_labels,
+            x: top_sample_values,
+            y: top_otu_id_labels,
             type: 'bar',
             orientation: 'h',
             // width: 500,
-            text: otu_labels
+            text: top_otu_labels
         }
 
         // data for bar chart
@@ -84,7 +89,7 @@ function optionChanged(test_id) {
 
         // layout
         var layout = {
-            title: 'Top 10 Samples'  
+            title: 'Top Samples'  
         }
 
         // plot chart
@@ -106,7 +111,7 @@ function optionChanged(test_id) {
         var data = [traceB];
 
         var layout = {
-            title: 'Bubble Stuff'
+            title: 'All Samples'
         }
 
         // plot bubble chart on bubble div
@@ -115,66 +120,166 @@ function optionChanged(test_id) {
         // demographis data
         var panelDiv = d3.select('#sample-metadata');
 
-        // add a new div
-        var demoTable = panelDiv.append('table').classed('table table-striped', true);
+        // clear the html first
+        panelDiv.html('');
 
-        // var demoTbody = demoTable.append('tbody')
-        var row = demoTable.append('tr').html(`<td>id:</td><td>${filteredMetaData[0].id}</td>`);       
-        var row = demoTable.append('tr').html(`<td>ethnicity:</td><td>${filteredMetaData[0].ethnicity}</td>`);
-        var row = demoTable.append('tr').html(`<td>gender:</td><td>${filteredMetaData[0].gender}</td>`);    
-        var row = demoTable.append('tr').html(`<td>age:</td><td>${filteredMetaData[0].age}</td>`);    
-        var row = demoTable.append('tr').html(`<td>location:</td><td>${filteredMetaData[0].location}</td>`);
-        var row = demoTable.append('tr').html(`<td>bbtype:</td><td>${filteredMetaData[0].bbtype}</td>`);     
-        var row = demoTable.append('tr').html(`<td>wfreq:</td><td>${filteredMetaData[0].wfreq}</td>`);
+        // checking out the object
+        // console.log(filteredMetaData);
 
-        //come back and use d3 for CSV
+        // Add the demographics one at a time, each one within a bootstrap row, with 4 columns on the label side, 8 on the value
+        // ID
+        var row = panelDiv.append('div')
+            .classed('row', true)
+            .html(`<div class="col-md-4">id: </div><div class="col-md-8">${filteredMetaData[0].id}</div>`);
 
-        // open the other json file (meta.json)
-        d3.json('../../meta.json').then((importedData) => {
+        // ethnicity
+        var row = panelDiv.append('div')
+            .classed('row', true)
+            .html(`<div class="col-md-4">ethnicity: </div><div class="col-md-8">${filteredMetaData[0].ethnicity}</div>`);
 
-            var data2 = importedData;
+        // gender
+        var row = panelDiv.append('div')
+            .classed('row', true)            
+            .html(`<div class="col-md-4">gender: </div><div class="col-md-8">${filteredMetaData[0].gender}</div>`);
 
-            console.log(test_id);
-            
-            // consozle.log(typeof(test_id))
+        // age
+        var row = panelDiv.append('div')
+            .classed('row', true)            
+            .html(`<div class="col-md-4">age: </div><div class="col-md-8">${filteredMetaData[0].age}</div>`);
+
+        // location
+        var row = panelDiv.append('div')
+            .classed('row', true)            
+            .html(`<div class="col-md-4">location: </div><div class="col-md-8">${filteredMetaData[0].location}</div>`);
+
+        // bbtype
+        var row = panelDiv.append('div')
+            .classed('row', true)            
+            .html(`<div class="col-md-4">bbtype: </div><div class="col-md-8">${filteredMetaData[0].bbtype}</div>`);
+
+        // wfreq
+        var row = panelDiv.append('div')
+            .classed('row', true)            
+            .html(`<div class="col-md-4">wfreq: </div><div class="col-md-8">${filteredMetaData[0].wfreq}</div>`);
+
+        // store the hand washing frequency for the gauge
+        var wfreq = filteredMetaData[0].wfreq;
+
+        // console.log(wfreq)
+
+
+        var traceG = {
+            domain: { 
+                x: [0, 1], 
+                y: [0, 1] },
+            value: wfreq,
+            title: { 
+                text: "Belly Button Washin Frequency" 
+            },
+            subtitle: {
+                text: "Scrubs per Week"
+            },
+            gauge: { 
+                bar: {
+                    color: 'black'
+                },
+                axis: { 
+                    
+                    // limit the gauge to 9 washes per week
+                    range: [0, 9],
+                    tickmode: 'array',
+                    tickvals: [0,1,2,3,4,5,6,7,8,9],
+                    ticktext: ['0-1','1-2','2-3','3-4','4-5','5-6','6-7','7-8','8-9'],
+                    ticks: 'outside'
+                },
+                steps: [
+                    {
+                        range: [0, 1],
+                        color: 'lightyellow'
+                    },
+                    {
+                        range: [1, 2],
+                        color: 'yellow'
+                    },
+                    {
+                        range: [2, 3],
+                        color: 'gold'
+                    },
+                    {
+                        range: [3, 4],
+                        color: 'khaki'
+                    },
+                    {
+                        range: [4, 5],
+                        color: 'tan'
+                    },
+                    {
+                        range: [5, 6],
+                        color: 'lightgreen'
+                    },
+                    {
+                        range: [6, 7],
+                        color: 'green'
+                    },
+                    {
+                        range: [7, 8],
+                        color: 'darkgreen'
+                    },
+                    {
+                        range: [8, 9],
+                        color: 'lime'
+                    }                    
+                ] 
+            },
+            type: "indicator",
+            mode: "gauge+number"
+        }
+
+        var data = [traceG];
         
-            var test_index = Object.entries(data2.ID).forEach(([key, value]) => {
+        var layout = {
+            width: 600, 
+            height: 500, 
+            margin: { t: 0, b: 0 } 
+        };
 
-                // console.log(value)
-                if (value === test_id) {
+        // chart the gauge
+        Plotly.newPlot('gauge', data, layout);
 
-                    return key;
-                    // console.log(key)
+        // // open the other json file (meta.json)
+        // d3.json('../../meta.json').then((importedData) => {
 
-                }
+        //     var data2 = importedData;
 
-            })
+        //     // setup the gauge div 
+        //     var gaugeDiv = d3.select('#gauge')
+
+        //     // empty the html first
+        //     gaugeDiv.html('');
+
+        //     var test_index = 0;
+
+        //     // loop through the IDs, if it finds the test subject, then load the gauge, 
+        //         //if not, show message that there is no hand washing info for test subject
+        //     Object.entries(data2.ID).forEach(([key, value]) => {
+
+        //         // console.log(value)
+        //         if (value === test_id) {
+
+        //             // make chart here
+                    
+        //         }
+
+        //     })
             
+        //     if (test_index === 0) {
 
-            // console.log(test_index);
+        //         // message that there is no info for test subject
+        //         var msgDiv = gaugeDiv.append('div').classed('well', true).text(`There is no hand washing information for test subject: ${test_id}`);
 
-            // var meta_ids = data2.ID.map(meta =>  meta);
+        //     }
 
-            // console.log(meta_ids);
-
-            // // find the index of the value we need, based on ID
-            // var test_index = data2.ID.map(function(d,i) {
-
-            //     if (d === test_id) {
-            //         return i
-            //     };
-
-            // });
-
-            // console.log.apply(test_index)
-
-            // filter 2nd data set for the same test_id
-            // var filteredData2 = data2.filter(meta => meta.id === test_id );
-
-            // console.log(filteredData2);
-
-
-        })
+        // })
     })
 }
 
