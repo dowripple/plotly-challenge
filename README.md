@@ -2,10 +2,6 @@
 ## by Michael Dowlin
 ## 2/01/20
 
-!['Bubble Image not available'](/static/images/bubble_chart.png)
-!['Bar Image not available'](/static/images/top_sample_bar.png)
-!['Gauge Image not available'](/static/images/gauge.png)
-
 ### Description
 This assignment explores the [Belly Button Biodiversity dataset](http://robdunnlab.com/projects/belly-button-biodiversity/), which catalogs the microbes that colonize human navels.  The data was provided as a json file (samples.json), along with a started html page.  For the assignment, I only modified the javascript file 'app.js'.   
 
@@ -20,3 +16,9 @@ The 'app.js' program starts by declaring a variable for the drop down list of te
 |index.html                    |html page for assignment, note that no HTML code was changed                                     |
 |samples.json                  |The data provided for the assignment.  The Json contains information about test subjects's belly button fauna, and includes other metadata, like belly button washing frequency       |
 |static\js\app.js              |Application for assignment.  This script parses the belly button datasets and manipulates the HTMl of the index.html page.  Changes include: adding 1 bar chart, adding 1 bubble chart, adding 1 gauge and a table of metadata.  |
+
+### Charting fun
+
+!['Bubble Image not available'](/static/images/bubble_chart.png)
+!['Bar Image not available'](/static/images/top_sample_bar.png)
+!['Gauge Image not available'](/static/images/gauge.png)
