@@ -204,39 +204,39 @@ function optionChanged(test_id) {
                 steps: [
                     {
                         range: [0, 1],
-                        color: 'lightyellow'
+                        color: '#FBEDEB'
                     },
                     {
                         range: [1, 2],
-                        color: 'yellow'
+                        color: '#FBEDEB'
                     },
                     {
                         range: [2, 3],
-                        color: 'gold'
+                        color: '#FB3624'
                     },
                     {
-                        range: [3, 4],
-                        color: 'khaki'
+                        range: [3, 4],  
+                        color: '#FB3624'
                     },
                     {
                         range: [4, 5],
-                        color: 'tan'
+                        color: '#6CB836'
                     },
                     {
                         range: [5, 6],
-                        color: 'lightgreen'
+                        color: '#6CB836'
                     },
                     {
                         range: [6, 7],
-                        color: 'green'
+                        color: '#5EC018'
                     },
                     {
                         range: [7, 8],
-                        color: 'darkgreen'
+                        color: '#5EC018'
                     },
                     {
                         range: [8, 9],
-                        color: 'lime'
+                        color: '#1D360A'
                     }                    
                 ] 
             },
