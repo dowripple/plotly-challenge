@@ -2,7 +2,12 @@
 var selDataset = d3.select('#selDataset');
 
 // using d3 to import the json file
-d3.json('/samples.json').then((importedData) => {
+//http://username.github.io/reponame/posts.json
+//http://dowripple.github.io/plotly-challenge/
+
+// THIS VERSION OF THE JSON CALL IS FOR 'GO-LIVE'
+// d3.json('/samples.json').then((importedData) => {
+d3.json('http://dowripple.github.io/plotly-challenge/samples.json').then((importedData) => {
 
     var data = importedData;
 
