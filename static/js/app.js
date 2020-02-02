@@ -6,6 +6,10 @@ var selDataset = d3.select('#selDataset');
 // THIS VERSION OF THE JSON CALL IS FOR 'GO-LIVE'
 // d3.json('/samples.json').then((importedData) => {
 
+var projectDesc = d3.selectAll('.jumbotron')
+    .append('p')
+    .html('<i style="font-size: 15px;">The data was provided by the Public Science Lab, read about their study <a href="http://robdunnlab.com/projects/belly-button-biodiversity/" target="_blank">here!</a></i>')
+
 // pulls from the json file in my github repo
 d3.json('https://dowripple.github.io/plotly-challenge/samples.json').then((importedData) => {
 
