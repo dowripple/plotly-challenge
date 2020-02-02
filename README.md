@@ -2,7 +2,7 @@
 ## by Michael Dowlin
 ## 2/01/20
 
-!['Bacteria image not available'](/static/images/bacteria.jpg)
+!['Bacteria image not available'](/static/images/bacteria.jpg)\
 *just a friendly, neighborhood bacterium*
 
 ### Description
@@ -22,9 +22,9 @@ The 'app.js' program starts by declaring a variable for the drop down list of te
 
 ### Charting fun
 
-!['Bubble Image not available'](/static/images/bubble_chart.png)
+!['Bubble Image not available'](/static/images/bubble_chart.png)\
 *Bubble chart of all the icky stuff*
-!['Bar Image not available'](/static/images/top_sample_bar.png)
+!['Bar Image not available'](/static/images/top_sample_bar.png)\
 *top 10 bacteria in #*
-!['Gauge Image not available'](/static/images/gauge.png)
+!['Gauge Image not available'](/static/images/gauge.png)\
 *Belly button washing meter*
