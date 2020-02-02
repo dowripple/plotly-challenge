@@ -35,7 +35,7 @@ d3.json('http://dowripple.github.io/plotly-challenge/samples.json').then((import
 // function that will refresh each component based on the drop down value
 function optionChanged(test_id) {
 
-    d3.json('../../samples.json').then((importedData) => {
+    d3.json('http://dowripple.github.io/plotly-challenge/samples.json').then((importedData) => {
 
         var data = importedData;
 
