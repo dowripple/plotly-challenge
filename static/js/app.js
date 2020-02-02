@@ -2,7 +2,7 @@
 var selDataset = d3.select('#selDataset');
 
 // using d3 to import the json file
-d3.json('../../samples.json').then((importedData) => {
+d3.json('/samples.json').then((importedData) => {
 
     var data = importedData;
 
