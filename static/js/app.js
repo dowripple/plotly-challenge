@@ -125,7 +125,7 @@ function optionChanged(test_id) {
         var data = [traceB];
 
         var layout = {
-            title: 'All Samples',
+            title: 'All Bacterial Species',
             xaxis: {
                 title: {
                     text: 'OTU ID'
