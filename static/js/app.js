@@ -98,7 +98,12 @@ function optionChanged(test_id) {
 
         // layout
         var layout = {
-            title: 'Top Samples'  
+            title: 'Top Bacterial Species',
+            xaxis: {
+                title: {
+                    text: '# of Bacteria'
+                }
+            }  
         }
 
         // plot chart
@@ -120,7 +125,17 @@ function optionChanged(test_id) {
         var data = [traceB];
 
         var layout = {
-            title: 'All Samples'
+            title: 'All Samples',
+            xaxis: {
+                title: {
+                    text: 'OTU ID'
+                }
+            },
+            yaxis: {
+                title: {
+                    text: '# of Bacteria'
+                }
+            }
         }
 
         // plot bubble chart on bubble div
@@ -139,37 +154,37 @@ function optionChanged(test_id) {
         // ID
         var row = panelDiv.append('div')
             .classed('row', true)
-            .html(`<div class="col-md-4">id: </div><div class="col-md-8">${filteredMetaData[0].id}</div>`);
+            .html(`<div class="col-md-4" style="text-align: right;">id: </div><div class="col-md-8">${filteredMetaData[0].id}</div>`);
 
         // ethnicity
         var row = panelDiv.append('div')
             .classed('row', true)
-            .html(`<div class="col-md-4">ethnicity: </div><div class="col-md-8">${filteredMetaData[0].ethnicity}</div>`);
+            .html(`<div class="col-md-4" style="text-align: right;">ethnicity: </div><div class="col-md-8">${filteredMetaData[0].ethnicity}</div>`);
 
         // gender
         var row = panelDiv.append('div')
             .classed('row', true)            
-            .html(`<div class="col-md-4">gender: </div><div class="col-md-8">${filteredMetaData[0].gender}</div>`);
+            .html(`<div class="col-md-4" style="text-align: right;">gender: </div><div class="col-md-8">${filteredMetaData[0].gender}</div>`);
 
         // age
         var row = panelDiv.append('div')
             .classed('row', true)            
-            .html(`<div class="col-md-4">age: </div><div class="col-md-8">${filteredMetaData[0].age}</div>`);
+            .html(`<div class="col-md-4" style="text-align: right;">age: </div><div class="col-md-8">${filteredMetaData[0].age}</div>`);
 
         // location
         var row = panelDiv.append('div')
             .classed('row', true)            
-            .html(`<div class="col-md-4">location: </div><div class="col-md-8">${filteredMetaData[0].location}</div>`);
+            .html(`<div class="col-md-4" style="text-align: right;">location: </div><div class="col-md-8">${filteredMetaData[0].location}</div>`);
 
         // bbtype
         var row = panelDiv.append('div')
             .classed('row', true)            
-            .html(`<div class="col-md-4">bbtype: </div><div class="col-md-8">${filteredMetaData[0].bbtype}</div>`);
+            .html(`<div class="col-md-4" style="text-align: right;">bbtype: </div><div class="col-md-8">${filteredMetaData[0].bbtype}</div>`);
 
         // wfreq
         var row = panelDiv.append('div')
             .classed('row', true)            
-            .html(`<div class="col-md-4">wfreq: </div><div class="col-md-8">${filteredMetaData[0].wfreq}</div>`);
+            .html(`<div class="col-md-4" style="text-align: right;">wfreq: </div><div class="col-md-8">${filteredMetaData[0].wfreq}</div>`);
 
         // store the hand washing frequency for the gauge
         var wfreq = filteredMetaData[0].wfreq;
@@ -183,7 +198,7 @@ function optionChanged(test_id) {
                 y: [0, 1] },
             value: wfreq,
             title: { 
-                text: "Belly Button Washin Frequency" 
+                text: "Belly Button Washin' Frequency" 
             },
             subtitle: {
                 text: "Scrubs per Week"
@@ -194,13 +209,14 @@ function optionChanged(test_id) {
                 },
                 axis: { 
                     
-                    // limit the gauge to 9 washes per week
+                    // limit the gauge to 9 washes per week, add tick marks etc.
                     range: [0, 9],
                     tickmode: 'array',
                     tickvals: [0,1,2,3,4,5,6,7,8,9],
                     ticktext: ['0-1','1-2','2-3','3-4','4-5','5-6','6-7','7-8','8-9'],
                     ticks: 'outside'
                 },
+                // I am horrible with color schemes, so i used this tool to get the colors: https://www.w3schools.com/colors/colors_complementary.asp
                 steps: [
                     {
                         range: [0, 1],
@@ -255,40 +271,6 @@ function optionChanged(test_id) {
         // chart the gauge
         Plotly.newPlot('gauge', data, layout);
 
-        // // open the other json file (meta.json)
-        // d3.json('../../meta.json').then((importedData) => {
-
-        //     var data2 = importedData;
-
-        //     // setup the gauge div 
-        //     var gaugeDiv = d3.select('#gauge')
-
-        //     // empty the html first
-        //     gaugeDiv.html('');
-
-        //     var test_index = 0;
-
-        //     // loop through the IDs, if it finds the test subject, then load the gauge, 
-        //         //if not, show message that there is no hand washing info for test subject
-        //     Object.entries(data2.ID).forEach(([key, value]) => {
-
-        //         // console.log(value)
-        //         if (value === test_id) {
-
-        //             // make chart here
-                    
-        //         }
-
-        //     })
-            
-        //     if (test_index === 0) {
-
-        //         // message that there is no info for test subject
-        //         var msgDiv = gaugeDiv.append('div').classed('well', true).text(`There is no hand washing information for test subject: ${test_id}`);
-
-        //     }
-
-        // })
     })
 }
 
